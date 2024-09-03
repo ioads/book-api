@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreBookRequest;
+use App\Http\Requests\UpdateBookRequest;
 use App\Http\Resources\BookResource;
 use App\Repositories\BookRepository;
 use App\Repositories\Interfaces\BookRepositoryInterface;
@@ -52,7 +53,7 @@ class BookController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateBookRequest $request, string $id)
     {
         return new BookResource($this->bookRepository->update($id, $request->validated()));
     }
