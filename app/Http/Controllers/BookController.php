@@ -8,6 +8,7 @@ use App\Http\Resources\BookResource;
 use App\Repositories\BookRepository;
 use App\Repositories\Interfaces\BookRepositoryInterface;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class BookController extends Controller
 {

@@ -26,7 +26,6 @@ class UpdateBookRequest extends FormRequest
             'subtitle' => 'nullable',
             'publication_year' => 'int|nullable',
             'description' => 'nullable',
-            'image' => 'nullable',
             'author' => 'required'
         ];
     }

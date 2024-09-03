@@ -4,6 +4,7 @@ namespace App\Repositories\Eloquent;
 
 use App\Models\Book;
 use App\Repositories\Interfaces\BookRepositoryInterface;
+use Illuminate\Support\Facades\Storage;
 
 class BookRepository implements BookRepositoryInterface
 {
@@ -26,6 +27,18 @@ class BookRepository implements BookRepositoryInterface
 
     public function create(array $data)
     {
+        if($data['image']) {
+            $extension  = $data['image']->getClientOriginalExtension();
+            $image_name = time() .'_' . str_replace(' ', '_', $data['title']) . '.' . $extension;
+            $path = $data['image']->storeAs(
+                'images',
+                $image_name,
+                's3'
+            );
+
+            $data['image'] = Storage::disk('s3')->url($path);
+        }
+        
         $book = $this->model->create($data);
         $book->author()->create($data['author']);
         return $book;

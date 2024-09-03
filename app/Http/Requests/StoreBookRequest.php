@@ -26,7 +26,7 @@ class StoreBookRequest extends FormRequest
             'subtitle' => 'nullable',
             'publication_year' => 'int|nullable',
             'description' => 'nullable',
-            'image' => 'nullable',
+            'image' => 'image|mimes:jpg,jpeg,png|max:2048',
             'author' => 'required'
         ];
     }
