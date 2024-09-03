@@ -31,9 +31,9 @@ class BookRepository implements BookRepositoryInterface
 
     public function update($id, array $data)
     {
-        $user = $this->model->find($id);
-        $user->update($data);
-        return $user;
+        $book = $this->model->find($id);
+        $book->update($data);
+        return $book;
     }
 
     public function delete($id)

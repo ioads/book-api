@@ -46,7 +46,7 @@ class BookController extends Controller
      */
     public function show(string $id)
     {
-        //
+        return new BookResource($this->bookRepository->find($id));
     }
 
     /**
@@ -54,7 +54,7 @@ class BookController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        return new BookResource($this->bookRepository->find($id));
     }
 
     /**
@@ -62,7 +62,7 @@ class BookController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        return new BookResource($this->bookRepository->update($id, $request->validated()));
     }
 
     /**
