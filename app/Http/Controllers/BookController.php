@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreBookRequest;
 use App\Http\Resources\BookResource;
 use App\Repositories\BookRepository;
 use App\Repositories\Interfaces\BookRepositoryInterface;
@@ -35,9 +36,9 @@ class BookController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreBookRequest $request)
     {
-        //
+        return new BookResource($this->bookRepository->create($request->validated()));
     }
 
     /**
