@@ -35,6 +35,7 @@ class BookRepository implements BookRepositoryInterface
     {
         $book = $this->model->find($id);
         $book->update($data);
+        $book->author()->first()->update($data['author']);
         return $book;
     }
 
