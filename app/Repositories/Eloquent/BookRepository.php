@@ -4,6 +4,8 @@ namespace App\Repositories\Eloquent;
 
 use App\Models\Book;
 use App\Repositories\Interfaces\BookRepositoryInterface;
+use DateTime;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
 
 class BookRepository implements BookRepositoryInterface
@@ -55,5 +57,24 @@ class BookRepository implements BookRepositoryInterface
     public function delete($id)
     {
         return $this->model->destroy($id);
+    }
+
+    public function getByIsbn(string $isbn)
+    {
+        $book = $this->model->where('isbn', '=', $isbn)->first();
+        if(!$book) {
+            $url = config('services.googlebooks.url') . '/volumes?q=+isbn:'.$isbn.'&key=' . config('services.googlebooks.key');
+            $response = Http::get($url);
+            $data = json_decode($response->body(), true);
+            foreach($data['items'] as $item) {
+                return $this->model->create([
+                    'isbn' => $isbn,
+                    'title' => $item['volumeInfo']['title'],
+                    'description' => $item['volumeInfo']['description'],
+                    'publication_year' => (new DateTime($item['volumeInfo']['publishedDate']))->format('Y'),
+                ]);
+            }
+        }
+        return $book;
     }
 }

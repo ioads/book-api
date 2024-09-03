@@ -16,3 +16,4 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::apiResource('books', BookController::class);
+Route::get('get-by-isbn/{isbn}', [BookController::class, 'getByIsbn']);

@@ -23,6 +23,7 @@ class StoreBookRequest extends FormRequest
     {
         return [
             'title' => 'required',
+            'isbn' => 'required',
             'subtitle' => 'nullable',
             'publication_year' => 'int|nullable',
             'description' => 'nullable',

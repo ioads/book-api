@@ -68,4 +68,12 @@ class BookController extends Controller
 
         return response()->json(['message' => 'Livro excluído com sucesso.'], 200);
     }
+
+    /**
+     * Get book by ISBN
+     */
+    public function getByIsbn(string $isbn)
+    {
+        return new BookResource($this->bookRepository->getByIsbn($isbn));
+    }
 }
