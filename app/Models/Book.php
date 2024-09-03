@@ -16,4 +16,9 @@ class Book extends Model
         'image',
         'description'
     ];
+
+    public function author()
+    {
+        return $this->hasOne(Author::class);
+    }
 }

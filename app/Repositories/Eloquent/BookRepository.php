@@ -26,7 +26,9 @@ class BookRepository implements BookRepositoryInterface
 
     public function create(array $data)
     {
-        return $this->model->create($data);
+        $book = $this->model->create($data);
+        $book->author()->create($data['author']);
+        return $book;
     }
 
     public function update($id, array $data)
