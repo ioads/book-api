@@ -63,6 +63,8 @@ class BookController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $this->bookRepository->delete($id);
+
+        return response()->json(['message' => 'Livro excluído com sucesso.'], 200);
     }
 }
